@@ -65,6 +65,20 @@ app.get('/gameView', (req, res) => {
     res.render('404.hbs');
   });
 });
+/*Load searchview*
+
+****************/
+app.get('/search', (req, res) => {
+  console.log(req.query.search);
+  igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
+    res.render('search.hbs',{
+      searchResults: gameEngine.searchResultsList(output.body)
+    });
+  },(e)=>{
+    res.render('404.hbs');
+  });
+});
+
 
 /*Game not found view*
 

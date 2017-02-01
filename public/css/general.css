@@ -1,3 +1,16 @@
 body{
 	margin: 1%;
+	background-color: #EEE;
+}
+
+
+
+
+/******/
+.searchResultBlock{
+	background-color: red;
+	border: 1px solid black;
+	min-width: 200px;
+	max-width: 300px;
+	float: left;
 }

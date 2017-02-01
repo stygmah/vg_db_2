@@ -1,5 +1,7 @@
-/****-Genre Associative Object-******
-************************************/
+const igdb = require('igdb-api-node')
+
+
+/*Genre Associative Object*/
 var genreArray = {
 	'2':"Point-and-click",
 	'4':"Fighting",
@@ -22,8 +24,7 @@ var genreArray = {
 	'32':"Indie",
 	'33':"Arcade"
 };
-/*******-Game Category Array-********
-************************************/
+/*Game Category Array*/
 var gameCategory = ['Main Game', 'DLC/Addon', 'Expansion','Bundle','Standalone Expansion'];
 
 
@@ -31,25 +32,40 @@ var gameCategory = ['Main Game', 'DLC/Addon', 'Expansion','Bundle','Standalone E
 
 /***********************/
 
-
-
-
-
-
 /*Genre Resolve*/
 var genreResolve = (genreId,i)=> {
-	
-	if(genreId === undefined || genreId[i] === undefined){
-		return " ";
-	}
-	if(i>0){
-		return " - "+genreArray[genreId[i].toString()];
-	}
+	if(genreId === undefined || genreId[i] === undefined) return " ";
+	if(i>0) return " - "+genreArray[genreId[i].toString()];
 	return genreArray[genreId[i].toString()];
+}
+
+
+/**Search functions**/
+/********************/
+var linkGame = (game)=>{
+	var id = game.id;
+	var name = game.name;
+	var genre1 = genreResolve(game.genres,0);
+	var genre2 = genreResolve(game.genres,1);
+	var thumb = igdb.image(game.cover, "thumb", "jpg");
+	var classes= "searchResultBlock";
+	return '<div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><h5>'+name+'</h5><h6>'+genre1+genre2+'</h6></a></div>';
+}
+
+
+var searchResultsList = (game)=>{
+	console.log(game[0]);
+	var htmlString ='';
+	for (var i = 0; i < game.length; i++) {
+		htmlString += linkGame(game[i]);
+	};
+	return htmlString;
 }
 
 /*Module exports*/
 module.exports = {
 	genreArray,
-	genreResolve
+	gameCategory,
+	genreResolve,
+	searchResultsList
 }
