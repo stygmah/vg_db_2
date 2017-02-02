@@ -69,7 +69,6 @@ app.get('/gameView', (req, res) => {
 
 ****************/
 app.get('/search', (req, res) => {
-  console.log(req.query.search);
   igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
     res.render('search.hbs',{
       searchResults: gameEngine.searchResultsList(output.body)
