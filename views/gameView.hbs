@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 
-<html>
+<html class="gradContainer">
 	{{> head}}
-	<body>
-		<div class="container">
-			{{> nav}}
-			<h1>{{gameTitle}}</h1>
-			<h4><em>{{genre1}}</em>  <em>{{genre2}}</em></h4>
-			<img src="{{image}}" alt="Cover of {{gameTitle}}">
-			<p>{{summary}}</p>
+	<body class="gradContainer">
+		{{> nav}}
+		<div class="container mainView">
+			<div class="row">
+				<div class="col-lg-9 col-md-9 col-sm-12 leftColumnGameView">
+					<h1>{{gameTitle}}</h1>
+					<h4><em>{{genre1}}</em>  <em>{{genre2}}</em></h4>
+					<div class="row">
+						<div class="col-lg-5 col-md-5">
+							<img src="{{image}}" alt="Cover of {{gameTitle}}">
+						</div>
+						<div class="col-lg-7 col-md-7">
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
+					</div>
+					<p>{{summary}}</p>
+					<div class="row mediaView">
+						dasdsada
+					</div>			
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-12 rightColumnGameView">
+
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
