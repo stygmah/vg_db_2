@@ -48,18 +48,18 @@ var linkGame = (game)=>{
 	var genre1 = genreResolve(game.genres,0);
 	var genre2 = genreResolve(game.genres,1);
 	var thumb = igdb.image(game.cover, "thumb", "jpg");
-	var classes= "searchResultBlock";
-	return '<div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><h5>'+name+'</h5><h6>'+genre1+genre2+'</h6></a></div>';
+	var classes= "searchBlock";
+	return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+genre1+genre2+'</h6></div></a></div></li>';
 }
 
 
 var searchResultsList = (game)=>{
 	console.log(game[0]);
-	var htmlString ='';
+	var htmlString ='<ul>';
 	for (var i = 0; i < game.length; i++) {
 		htmlString += linkGame(game[i]);
 	};
-	return htmlString;
+	return htmlString+'</ul>';
 }
 
 /*Module exports*/

@@ -16,44 +16,17 @@ body{
 /******/
 .mainView{
 	background-color: #274449;
+	margin-top: 20px;
 }
-.navbar{
+.formerNav{
 	background-color: #274449;
-	margin-left: 0;
-	margin-right: 0;
-}
-.rightColumnGameView{
-	background-color: #274449;
-	height: 1500px;
-	border-left: 1px solid #333;
-}
-.leftColumnGameView{
-	color: #E5FFFC;
-	background-color: #2D4D54;
-}
-.leftColumnGameView h1{
-	color: #B5E5E4;
-}
-.leftColumnGameView h4{
-	color: #B5E5E4;
-}
-
-.mediaView{
-	background-color: black;
-	height: 400px;
-
 }
 
 
 
 
 /*///*/
-.searchResultBlock{
-	border: 1px solid black;
-	min-width: 200px;
-	max-width: 300px;
-	float: left;
-}
+
 
 .navbar-form
 {

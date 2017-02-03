@@ -1,0 +1,16 @@
+.searchBlock{
+	background-color: #2D4D54;
+	width: 100%;
+	height: 50px;
+}
+
+.searchBlock a{
+	text-decoration: none;
+	color: #E5FFFC;
+}
+
+.searchBlock img{
+	float:left;
+	width: 50px;
+	height: 50px;
+}

@@ -54,12 +54,13 @@ app.get('/', (req, res) => {
 app.get('/gameView', (req, res) => {
   igdb.games({ ids: [req.query.id], fields: "*" }).then((output)=>{
     res.render('gameView.hbs',{
+      css: "gameView",
       pageTitle: output.body[0].name,
       gameTitle: output.body[0].name,
       genre1: gameEngine.genreResolve(output.body[0].genres,0),
       genre2: gameEngine.genreResolve(output.body[0].genres,1),
       image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
-      summary: output.body[0].summary || output.body[0].name+" has no description yet"
+      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
     });
   },(e)=>{
     res.render('404.hbs');
@@ -71,6 +72,7 @@ app.get('/gameView', (req, res) => {
 app.get('/search', (req, res) => {
   igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
     res.render('search.hbs',{
+      css:'search',
       searchResults: gameEngine.searchResultsList(output.body)
     });
   },(e)=>{
