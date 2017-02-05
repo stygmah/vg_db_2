@@ -1,6 +1,5 @@
 const igdb = require('igdb-api-node')
 
-
 /*Genre Associative Object*/
 var genreArray = {
 	'2':"Point-and-click",
@@ -62,10 +61,28 @@ var searchResultsList = (game)=>{
 	return htmlString+'</ul>';
 }
 
+
+/**RENDER OBJECTS**/
+/******************/
+
+/*Game View*/
+var gameViewRenderObject = (output)=>{
+	return {
+      css: "gameView",
+      pageTitle: output.body[0].name,
+      gameTitle: output.body[0].name,
+      genre1: genreResolve(output.body[0].genres,0),
+      genre2: genreResolve(output.body[0].genres,1),
+      image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
+      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
+  };
+}
+
 /*Module exports*/
 module.exports = {
 	genreArray,
 	gameCategory,
 	genreResolve,
-	searchResultsList
+	searchResultsList,
+	gameViewRenderObject
 }
