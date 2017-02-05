@@ -53,7 +53,6 @@ var linkGame = (game)=>{
 
 
 var searchResultsList = (game)=>{
-	console.log(game[0]);
 	var htmlString ='<ul>';
 	for (var i = 0; i < game.length; i++) {
 		htmlString += linkGame(game[i]);
@@ -68,13 +67,23 @@ var searchResultsList = (game)=>{
 /*Game View*/
 var gameViewRenderObject = (output)=>{
 	return {
-      css: "gameView",
+      css: "views",
       pageTitle: output.body[0].name,
       gameTitle: output.body[0].name,
       genre1: genreResolve(output.body[0].genres,0),
       genre2: genreResolve(output.body[0].genres,1),
       image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
       summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
+  };
+}
+/*Company view*/
+var systemViewRenderObject = (output)=>{
+	return {
+      css: "views",
+      pageTitle: output.body[0].name,
+      systemName: output.body[0].name,
+      image:  igdb.image(output.body[0].logo, "cover_big", "jpg") || "no image",
+      summary: output.body[0].description/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
   };
 }
 
