@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "countrydata": "^2.0.1",
     "express": "^4.14.1",
     "hbs": "^4.0.1",
     "igdb-api-node": "^2.0.2",

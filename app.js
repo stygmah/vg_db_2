@@ -52,12 +52,20 @@ app.get('/gameView', (req, res) => {
     res.render('404.hbs');
   });
 });
+/*Load company view*
+****************/
+app.get('/companyView', (req, res) => {
+  igdb.companies({ ids: [req.query.id], fields: "*" }).then((output)=>{
+    res.render('companyView.hbs', gameEngine.companyViewRenderObject(output));
+  },(e)=>{
+    res.render('404.hbs');
+  });
+});
 
 
 /*Load searchview*
 *****************/
 app.get('/search', (req, res) => {
-
   if(req.query.type === 'game'){
     igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*"}).then((output)=>{
       if (req.query.search === ''|| output.length === 0) {
