@@ -43,8 +43,7 @@ app.get('/', (req, res) => {
   });
 });
 
-/*Load game view*
-****************/
+/*Load game view*/
 app.get('/gameView', (req, res) => {
   igdb.games({ ids: [req.query.id], fields: "*" }).then((output)=>{
     res.render('gameView.hbs', gameEngine.gameViewRenderObject(output));
@@ -52,11 +51,18 @@ app.get('/gameView', (req, res) => {
     res.render('404.hbs');
   });
 });
-/*Load company view*
-****************/
+/*Load company view*/
 app.get('/companyView', (req, res) => {
   igdb.companies({ ids: [req.query.id], fields: "*" }).then((output)=>{
     res.render('companyView.hbs', gameEngine.companyViewRenderObject(output));
+  },(e)=>{
+    res.render('404.hbs');
+  });
+});
+/*Load system view*/
+app.get('/systemView', (req, res) => {
+  igdb.platforms({ ids: [req.query.id], fields: "*" }).then((output)=>{
+    res.render('systemView.hbs', gameEngine.systemViewRenderObject(output));
   },(e)=>{
     res.render('404.hbs');
   });
@@ -89,8 +95,6 @@ app.get('/search', (req, res) => {
     });
   }
 });
-
-
 /*Bad request view*
 ******************/
 app.get('/badRequest', (req, res) => {

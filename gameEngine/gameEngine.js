@@ -62,10 +62,10 @@ var linkSearch = (search, type)=>{
 	}else if(type === "company"){
 		var thumb = igdb.image(search.logo, "thumb", "jpg");
 
-		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+countryResolve(search.country)+'</h6></div></a></div></li>';
+		return '<li><div class="'+classes+'"><a href="/companyView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+countryResolve(search.country)+'</h6></div></a></div></li>';
 	}else if(type === "system"){
 		var thumb = igdb.image(search.logo, "thumb", "jpg");
-		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+'country'+'</h6></div></a></div></li>';
+		return '<li><div class="'+classes+'"><a href="/systemView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+'country'+'</h6></div></a></div></li>';
 	}else{
 
 	}
@@ -109,6 +109,16 @@ var companyViewRenderObject = (output)=>{
       summary: output.body[0].description/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
   };
 }
+/*System view*/
+var systemViewRenderObject = (output)=>{
+	return {
+      css: "views",
+      pageTitle: output.body[0].name,
+      systemName: output.body[0].name,
+      image:  igdb.image(output.body[0].logo, "cover_big", "jpg") || "no image",
+      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
+  };
+}
 
 
 /****************/
@@ -120,5 +130,6 @@ module.exports = {
 	genreResolve,
 	searchResultsList,
 	gameViewRenderObject,
-	companyViewRenderObject
+	companyViewRenderObject,
+	systemViewRenderObject
 }
