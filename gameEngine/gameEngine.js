@@ -41,21 +41,33 @@ var genreResolve = (genreId,i)=> {
 
 /**Search functions**/
 /********************/
-var linkGame = (game)=>{
-	var id = game.id;
-	var name = game.name;
-	var genre1 = genreResolve(game.genres,0);
-	var genre2 = genreResolve(game.genres,1);
-	var thumb = igdb.image(game.cover, "thumb", "jpg");
+var linkSearch = (search, type)=>{
+	debugger;
+	console.log(search);
+	var id = search.id;
+	var name = search.name;
 	var classes= "searchBlock";
-	return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+genre1+genre2+'</h6></div></a></div></li>';
+	if(type === "game"){
+		var genre1 = genreResolve(search.genres,0);
+		var genre2 = genreResolve(search.genres,1);
+		var thumb = igdb.image(search.cover, "thumb", "jpg");
+		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+genre1+genre2+'</h6></div></a></div></li>';
+	}else if(type === "company"){
+		var thumb = igdb.image(search.logo, "thumb", "jpg");
+		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+'country'+'</h6></div></a></div></li>';
+	}else if(type === "system"){
+
+	}else{
+
+	}
+
 }
 
 
-var searchResultsList = (game)=>{
+var searchResultsList = (search, type)=>{
 	var htmlString ='<ul>';
-	for (var i = 0; i < game.length; i++) {
-		htmlString += linkGame(game[i]);
+	for (var i = 0; i < search.length; i++) {
+		htmlString += linkSearch(search[i], type);
 	};
 	return htmlString+'</ul>';
 }
@@ -87,7 +99,10 @@ var systemViewRenderObject = (output)=>{
   };
 }
 
+
+/****************/
 /*Module exports*/
+/****************/
 module.exports = {
 	genreArray,
 	gameCategory,

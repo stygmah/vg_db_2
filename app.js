@@ -57,14 +57,19 @@ app.get('/gameView', (req, res) => {
 /*Load searchview*
 *****************/
 app.get('/search', (req, res) => {
+  
   if(req.query.type === 'game'){
     igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
-      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body)});
+      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
     },(e)=>{
       res.render('404.hbs');
     });
   }else if(req.query.type === 'company'){
-    console.log('searched company');
+    igdb.companies({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
+      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
+    },(e)=>{
+      res.render('404.hbs');
+    });
   }else if(req.query.type === 'system'){
     console.log('searched system');
   }
