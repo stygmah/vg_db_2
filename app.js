@@ -57,21 +57,28 @@ app.get('/gameView', (req, res) => {
 /*Load searchview*
 *****************/
 app.get('/search', (req, res) => {
-  
+
   if(req.query.type === 'game'){
-    igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
+    igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*"}).then((output)=>{
+      if (req.query.search === ''|| output.length === 0) {
+        res.render('404.hbs');
+      };
       res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
     },(e)=>{
-      res.render('404.hbs');
+      console.log(e);
     });
   }else if(req.query.type === 'company'){
-    igdb.companies({ search: req.query.search, limit: req.query.limit || 10, fields: "*" }).then((output)=>{
+    igdb.companies({ search: req.query.search, limit: req.query.limit || 10, fields: "*", order:'popularity:desc'}).then((output)=>{
       res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
     },(e)=>{
       res.render('404.hbs');
     });
   }else if(req.query.type === 'system'){
-    console.log('searched system');
+    igdb.platforms({ search: req.query.search, limit: req.query.limit || 10, fields: "*"}).then((output)=>{
+      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
+    },(e)=>{
+      res.render('404.hbs');
+    });
   }
 });
 

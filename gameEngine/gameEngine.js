@@ -42,8 +42,6 @@ var genreResolve = (genreId,i)=> {
 /**Search functions**/
 /********************/
 var linkSearch = (search, type)=>{
-	debugger;
-	console.log(search);
 	var id = search.id;
 	var name = search.name;
 	var classes= "searchBlock";
@@ -56,7 +54,8 @@ var linkSearch = (search, type)=>{
 		var thumb = igdb.image(search.logo, "thumb", "jpg");
 		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+'country'+'</h6></div></a></div></li>';
 	}else if(type === "system"){
-
+		var thumb = igdb.image(search.logo, "thumb", "jpg");
+		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+'country'+'</h6></div></a></div></li>';
 	}else{
 
 	}
