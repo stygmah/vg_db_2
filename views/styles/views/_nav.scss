@@ -1,0 +1,14 @@
+
+.nav-main{
+	background-color: $background-nav-color;
+	li{
+		background-color: $background-nav-color;
+	}
+	button{
+		border-radius: 0 10px 10px 0;
+	}
+	.search-input{
+		border-radius: 10px 0 0 10px;
+	}
+	
+}

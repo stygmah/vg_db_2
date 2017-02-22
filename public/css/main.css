@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  background-color: #EEE;
+  font-family: "Oswald", Sans-serif;
+  color: white; }
+
+.grad-container {
+  background: #000000;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #000000 2%, #7db9e8 99%, #7db9e8 100%, #689ec1 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #000000 2%, #7db9e8 99%, #7db9e8 100%, #689ec1 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #000000 2%, #7db9e8 99%, #7db9e8 100%, #689ec1 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#689ec1',GradientType=0 ); }
+
+body {
+  margin: 0; }
+
+.nav-main {
+  background-color: #111111; }
+  .nav-main li {
+    background-color: #111111; }
+  .nav-main button {
+    border-radius: 0 10px 10px 0; }
+  .nav-main .search-input {
+    border-radius: 10px 0 0 10px; }
+
+/* Style the tab */
+div.tab {
+  overflow: hidden;
+  background-color: #111111;
+  color: #fff;
+  height: 40px; }
+
+/* Style the links inside the tab */
+div.tab a {
+  float: left;
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px; }
+
+/* Change background color of links on hover */
+div.tab a:hover {
+  background-color: #ddd;
+  color: #111111; }
+
+/* Create an active/current tablink class */
+div.tab a:focus, .active {
+  background-color: #ccc;
+  color: #111111; }
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none; }
+
+img {
+  padding: 1rem; }

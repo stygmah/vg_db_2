@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass -o css views/styles/main.scss public/css/main.css"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +15,8 @@
     "hbs": "^4.0.1",
     "igdb-api-node": "^2.0.2",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "node-sass": "^4.5.0"
   }
 }

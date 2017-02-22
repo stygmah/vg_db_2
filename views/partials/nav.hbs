@@ -1,47 +1,49 @@
-{{!-- 
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
- --}}
 
+    
 
-<nav class="container navbar-default formerNav" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>    
-    <a class="navbar-brand" href="#">Brand</a>
-  </div>
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Left</a></li>
-        <li><a href="#about">Left</a></li>
-    </ul>
-    <form class="navbar-form" action="/search" method="GET">
-        <div class="former">
-          	<input name="search" type="text" placeholder="Search for game" class="form-control" >
-            <select class="searchDropdown" name="type">
-              <option value="game">Game</option>
-              <option value="company">Company</option>
-              <option value="system">System</option>
-            </select>
-          	<button type="submit" class="btn btn-default" tyle="display:inline">Submit</button>
-        </div>
-        
-    </form>
+<div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+  <div class="title-bar-title">Menu</div>
+</div>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#about">Right</a></li>
-      <li><a href="#contact">Right</a></li>
+<div class="top-bar nav-main" id="example-menu">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Site Title</li>
+      <li>
+        <a href="#">One</a>
+        <ul class="menu vertical">
+          <li><a href="#">One</a></li>
+          <li><a href="#">Two</a></li>
+          <li><a href="#">Three</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Two</a></li>
+      <li><a href="#">Three</a></li>
     </ul>
   </div>
-</nav>
-
+  <div class="top-bar-left">
+    <form action="/search" method="GET">
+    <div>
+      <ul class="menu">
+        <li><input class="search-input" type="search" name="search" type="text" placeholder="Search for game"></li>
+        <li><select class="searchDropdown" name="type">
+          <option value="game">Game</option>
+          <option value="company">Company</option>
+          <option value="system">System</option>
+        </select></li>
+        <li><button type="submit" class="button">Submit</button></li>
+      </ul>
+    </div>
+  </form>
+  </div>
+    <div class="top-bar-right">
+    <ul class="menu">
+      <li><a href="#">Login</a></li>
+      <li><a href="#">Signup</a></li>
+    </ul>
+  </div>
+</div>
 
 
 

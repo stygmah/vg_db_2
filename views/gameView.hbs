@@ -1,42 +1,27 @@
 
 <!DOCTYPE html>
 
-<html class="gradContainer">
+<html>
 	{{> head}}
-	<body class="gradContainer">
+	<body class="grad-container">
 		{{> nav}}
-		<div class="container mainView">
-			<div class="row">
-				<div class="col-lg-9 col-md-9 col-sm-12 leftColumnGameView">
-					<h1>{{gameTitle}}</h1>
-					<h4><em>{{genre1}}</em>  <em>{{genre2}}</em></h4>
-					<div class="row">
-						<div class="col-lg-5 col-md-5">
-							<img src="{{image}}" alt="Cover of {{gameTitle}}">
-						</div>
-						<div class="col-lg-7 col-md-7">
-							<ul>
-								<li><strong>Game category: </strong> {{gameCategory}}</li>
-								<li><strong>System(s): </strong> </li>
-								<li><strong>Developer(s): </strong> </li>
-								<li><strong>Publisher(s): </strong></li>
-								<li><strong>Release date: </strong></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-							<p>{{summary}}</p>
-						</div>
-					</div>
-					
-					<div class="row mediaView">
-						
-					</div>			
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-12 rightColumnGameView">
-
-				</div>
+		
+		<div class="row">
+			<div class="column large-8">
+			<!--LEFT COLUMN-->
+			{{> gameMenu}}
+			</div>
+		
+			<div class="column large-4">
+			<!--RIGHT COLUMN-->
+				RIGHT COLUMN
 			</div>
 		</div>
+
+
+		<!--Js-->
+		{{> jsbottom}}
+		<script src="../../public/js/gameMenu.js">
+		</script>
 	</body>
 </html>

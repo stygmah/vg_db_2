@@ -88,7 +88,6 @@ var searchResultsList = (search, type)=>{
 /*Game View*/
 var gameViewRenderObject = (output)=>{
 	return {
-      css: "views",
       pageTitle: output.body[0].name,
       gameTitle: output.body[0].name,
       gameCategory: gameCategory[output.body[0].category],
@@ -101,7 +100,6 @@ var gameViewRenderObject = (output)=>{
 /*Company view*/
 var companyViewRenderObject = (output)=>{
 	return {
-      css: "views",
       pageTitle: output.body[0].name,
       companyName: output.body[0].name,
       country: countryResolve(output.body[0].country),
@@ -112,7 +110,6 @@ var companyViewRenderObject = (output)=>{
 /*System view*/
 var systemViewRenderObject = (output)=>{
 	return {
-      css: "views",
       pageTitle: output.body[0].name,
       systemName: output.body[0].name,
       image:  igdb.image(output.body[0].logo, "cover_big", "jpg") || "no image",
