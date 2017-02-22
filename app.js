@@ -38,9 +38,19 @@ app.use((req,res,next)=>{
 /*Load home view*
 ****************/
 app.get('/', (req, res) => {
-  res.render('home.hbs',{
-    pageTitle: 'Home'
+  igdb.games({ ids: gameEngine.gamesArray, fields: "*" }).then((output)=>{
+    console.log(output.body[1]);
+    console.log(output.body[2]);
+    console.log(output.body[0]);
+    console.log(gameEngine.renderHome(output));
+    res.render('home.hbs', gameEngine.renderHome(output));
+  },(e)=>{
+    res.render('404.hbs');
   });
+
+
+
+
 });
 
 /*Load game view*/
@@ -102,6 +112,12 @@ app.get('/badRequest', (req, res) => {
     errorMessage: 'Unable to handle request'
   });
 });
+
+/*testing purposes only*/
+app.get('/test', (req, res) => {
+
+});
+
 
 /*******************/
 /*Server on function/

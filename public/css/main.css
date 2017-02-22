@@ -18,6 +18,17 @@ body {
 body {
   margin: 0; }
 
+.main-view {
+  margin-top: 100px;
+  background-color: #555; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", Sans-serif; }
+
+.gameBlock .inner {
+  display: inline-block;
+  margin-left: 1.5rem; }
+
 .nav-main {
   background-color: #111111; }
   .nav-main li {
@@ -26,6 +37,9 @@ body {
     border-radius: 0 10px 10px 0; }
   .nav-main .search-input {
     border-radius: 10px 0 0 10px; }
+
+.top-bar, .top-bar ul {
+  background-color: #111111; }
 
 /* Style the tab */
 div.tab {

@@ -74,7 +74,7 @@ var linkSearch = (search, type)=>{
 
 
 var searchResultsList = (search, type)=>{
-	var htmlString ='<ul>';
+	var htmlString ='<ul class="result-list">';
 	for (var i = 0; i < search.length; i++) {
 		htmlString += linkSearch(search[i], type);
 	};
@@ -82,7 +82,7 @@ var searchResultsList = (search, type)=>{
 }
 
 
-/**RENDER OBJECTS**/
+/**RENDER OBJECTS VIEWS**/
 /******************/
 
 /*Game View*/
@@ -117,6 +117,37 @@ var systemViewRenderObject = (output)=>{
   };
 }
 
+/**Selection Games***
+******************/
+var gamesArray = [7346, 11156, 18320, 19562, 19765, 26761, 7349, 25076, 10031];
+
+
+
+
+var renderHome = (output)=>{
+	return {
+		pageTitle: 'Home',
+
+		game1Id: gamesArray[0],
+		game1Title: output.body[0].name,
+		game1Thumb: igdb.image(output.body[0].cover, "cover_big", "jpg"),
+		game2Id: gamesArray[1],
+		game2Title: output.body[1].name,
+		game2Thumb: igdb.image(output.body[1].cover, "cover_big", "jpg"),
+		game3Id: gamesArray[2],
+		game3Title: output.body[2].name,
+		game3Thumb: igdb.image(output.body[2].cover, "cover_big", "jpg"),
+		game4Id: gamesArray[3],
+		game4Title: output.body[3].name,
+		game4Thumb: igdb.image(output.body[3].cover, "cover_big", "jpg"),
+		game5Id: gamesArray[4],
+		game5Title: output.body[4].name,
+		game5Thumb: igdb.image(output.body[4].cover, "cover_big", "jpg"),
+		game6Id: gamesArray[5],
+		game6Title: output.body[5].name,
+		game6Thumb: igdb.image(output.body[5].cover, "cover_big", "jpg")
+	}
+}
 
 /****************/
 /*Module exports*/
@@ -128,5 +159,7 @@ module.exports = {
 	searchResultsList,
 	gameViewRenderObject,
 	companyViewRenderObject,
-	systemViewRenderObject
+	systemViewRenderObject,
+	renderHome,
+	gamesArray
 }
