@@ -29,7 +29,6 @@ var gameCategory = ['Main Game', 'DLC/Addon', 'Expansion','Bundle','Standalone E
 
 
 /*****Text Resolvers*****
-
 /***********************/
 
 /*Genre Resolve*/
@@ -46,7 +45,55 @@ var countryResolve = (iso)=>{
 		return countrydata.numeric[iso].name.en;
 	}
 }
+/*Console resolvers*
+********************
+*******************/
 
+/*Console Resolve ASYNC*/
+var consoleResolve = (systemID, callback)=>{
+	igdb.platforms({ ids: [systemID], fields: "*"}).then((output)=>{
+      callback(output.body[0].name);
+    },(e)=>{
+      console.log("Error resolving console");
+      callback (1);
+    });
+}
+
+/*Multiple Resolve ASYNC*/
+var consoleMultipleResolve = (consoleArray, callback)=>{
+	var resolvedArray = [];
+	itemsProcessed = 0;
+
+	consoleArray.forEach((item)=>{	
+		consoleResolve(item,(consol)=>{
+			resolvedArray.push(consol);
+			itemsProcessed++;
+			if(itemsProcessed === consoleArray.length) {
+      			callback(resolvedArray);
+    		}
+		});
+	});
+}
+/*createConsoleArray*/
+var consoleArrayResolve = (game)=>{
+	var resolvedArray = [];
+	var unresolvedArray = game.body[0].release_dates;
+	itemsProcessed = 0;
+
+	for(var i = 0; i<unresolvedArray.length;i++){
+		resolvedArray.push(unresolvedArray[i].platform);
+		itemsProcessed++;
+	}
+	return resolvedArray;
+}
+/*consoleArrayToLinks*/
+var consoleArrayToLinks = (consoleArray)=>{
+	var result = '';
+
+	consoleArray.forEach((element)=>{
+		result = result + element;
+	});
+}
 
 /**Search functions**/
 /********************/
@@ -161,5 +208,8 @@ module.exports = {
 	companyViewRenderObject,
 	systemViewRenderObject,
 	renderHome,
-	gamesArray
+	gamesArray,
+	consoleResolve,
+	consoleMultipleResolve,
+	consoleArrayResolve
 }

@@ -115,9 +115,15 @@ app.get('/badRequest', (req, res) => {
 
 /*testing purposes only*/
 app.get('/test', (req, res) => {
+ 
+  igdb.games({ ids:[1223], fields: "*" }).then((output)=>{
+    gameEngine.consoleMultipleResolve(gameEngine.consoleArrayResolve(output),(res)=>{
+      console.log(res);
+    });
+  },(e)=>{
 
+  });
 });
-
 
 /*******************/
 /*Server on function/
