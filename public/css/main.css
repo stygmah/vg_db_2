@@ -19,7 +19,7 @@ body {
   margin: 0; }
 
 .main-view {
-  margin-top: 100px;
+  margin-top: 5rem;
   background-color: #555; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,7 +27,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .gameBlock .inner {
   display: inline-block;
-  margin-left: 1.5rem; }
+  margin-left: 1.5rem;
+  vertical-align: bottom; }
 
 .nav-main {
   background-color: #111111; }
