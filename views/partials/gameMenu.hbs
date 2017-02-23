@@ -9,7 +9,7 @@
 	<!--Tab Menu-->
 	<div class="tab row">
 		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Summary')">Summary</a>
-		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Paris')">Something</a>
+		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Details')">Details</a>
 		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Tokyo')">Something</a>
 	</div>
 	<div class="row">
@@ -22,17 +22,17 @@
 			<div>
 				<ul>
 					<li><strong>Game category: </strong> {{gameCategory}}</li>
+					<li><strong>Release date: </strong>{{releaseDate}}</li>
 					<li><strong>System(s): </strong> {{{consoles}}} </li>
 					<li><strong>Developer(s): </strong> </li>
 					<li><strong>Publisher(s): </strong></li>
-					<li><strong>Release date: </strong></li>
 				</ul>
 				<p>{{summary}}</p>
 			</div>
 		</div>
 		<!--Tab 2-->
-		<div id="Paris" class="tabcontent column small-12 large-9">
-		  <h3>Paris</h3>
+		<div id="Details" class="tabcontent column small-12 large-9">
+		  <h3>Details</h3>
 		  <p>Paris is the capital of Fra.</p> 
 		</div>
 		<!--Tab 3-->

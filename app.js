@@ -6,7 +6,10 @@ const path = require('path');
 const igdb = require('igdb-api-node')
 //Other Const
 const doc = require('./private/doc');
+
+const engineVariables = require('./gameEngine/engineVariables');
 const gameEngine = require('./gameEngine/gameEngine');
+
 global.mashapeKey = doc.mashapeKey;
 const port = process.env.PORT || 3000;
 
@@ -38,7 +41,7 @@ app.use((req,res,next)=>{
 /*Load home view*
 ****************/
 app.get('/', (req, res) => {
-  igdb.games({ ids: gameEngine.gamesArray, fields: "*" }).then((output)=>{
+  igdb.games({ ids: gameEngine.gamesArray, fields: engineVariables.gameRenderFields }).then((output)=>{
     console.log(output.body[1]);
     console.log(output.body[2]);
     console.log(output.body[0]);
@@ -55,7 +58,7 @@ app.get('/', (req, res) => {
 
 /*Load game view*/
 app.get('/gameView', (req, res) => {
-  igdb.games({ ids: [req.query.id], fields: "*" }).then((output)=>{
+  igdb.games({ ids: [req.query.id], fields: engineVariables.gameRenderFields }).then((output)=>{
     gameEngine.gameToConsoleLinks(output,(consoles)=>{
       res.render('gameView.hbs', gameEngine.gameViewRenderObject(output,consoles));
     });
@@ -85,7 +88,7 @@ app.get('/systemView', (req, res) => {
 *****************/
 app.get('/search', (req, res) => {
   if(req.query.type === 'game'){
-    igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: "*"}).then((output)=>{
+    igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: engineVariables.gameRenderFields}).then((output)=>{
       if (req.query.search === ''|| output.length === 0) {
         res.render('404.hbs');
       };
@@ -118,11 +121,8 @@ app.get('/badRequest', (req, res) => {
 /*testing purposes only*/
 app.get('/test', (req, res) => {
  
-  igdb.games({ ids: [1036], fields: "*" }).then((output)=>{
-    console.log(output.body[0]);
-    gameEngine.gameToConsoleLinks(output,(consoles)=>{
-      console.log(gameEngine.gameViewRenderObject(output,consoles));
-    });
+  igdb.games({ ids: [1036], fields: engineVariables.gameRenderFields }).then((output)=>{
+    //console.log(output.body[0]);
   },(e)=>{
     res.render('404.hbs');
   });

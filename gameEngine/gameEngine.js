@@ -94,7 +94,7 @@ var consoleArrayToLinks = (game, consoleID )=>{
 	return'<a href="/systemView?id='+consoleID+'">'+game+'</a>';
 
 }
-/*gameToConsoleLinks*/
+/*gameToConsoleLinks ASYNC*/
 var gameToConsoleLinks = (game, callback)=>{
 	result='';
 	itm = 0;
@@ -159,6 +159,8 @@ var searchResultsList = (search, type)=>{
 
 /*Game View*/
 var gameViewRenderObject = (output, consoles)=>{
+	var date = new Date(output.body[0].first_release_date);
+	var date = date.toString();
 	return {
       pageTitle: output.body[0].name,
       gameTitle: output.body[0].name,
@@ -167,7 +169,8 @@ var gameViewRenderObject = (output, consoles)=>{
       genre2: genreResolve(output.body[0].genres,1),
       image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
       summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet",
-      consoles: consoles
+      consoles: consoles,
+      releaseDate: date.substring(4,16) || unknown
   };
 }
 /*Company view*/
