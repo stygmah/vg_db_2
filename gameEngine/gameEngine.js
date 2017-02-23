@@ -45,6 +45,8 @@ var countryResolve = (iso)=>{
 		return countrydata.numeric[iso].name.en;
 	}
 }
+
+
 /*Console resolvers*
 ********************
 *******************/
@@ -86,14 +88,38 @@ var consoleArrayResolve = (game)=>{
 	}
 	return resolvedArray;
 }
-/*consoleArrayToLinks*/
-var consoleArrayToLinks = (consoleArray)=>{
-	var result = '';
 
-	consoleArray.forEach((element)=>{
-		result = result + element;
+/*consoleToLink*/
+var consoleArrayToLinks = (game, consoleID )=>{	
+	return'<a href="/systemView?id='+consoleID+'">'+game+'</a>';
+
+}
+/*gameToConsoleLinks*/
+var gameToConsoleLinks = (game, callback)=>{
+	result='';
+	itm = 0;
+	doneArray = [];
+
+	consoleArray = consoleArrayResolve(game);
+	console.log("Array length"+consoleArray.length);
+	consoleArray.forEach((item)=>{	
+		consoleResolve(item,(consol)=>{
+
+			//COMPARE IF CONSOLE ALLREADY DONE
+			if(!compareArray(doneArray, item) || itm === 0){
+				result = consoleArrayToLinks(consol,item)+result;
+				doneArray.push(item);
+			}
+
+			
+			itm++;
+			if(itm === consoleArray.length) {
+      			callback(result);
+   			}
+		});
 	});
 }
+
 
 /**Search functions**/
 /********************/
@@ -119,7 +145,6 @@ var linkSearch = (search, type)=>{
 
 }
 
-
 var searchResultsList = (search, type)=>{
 	var htmlString ='<ul class="result-list">';
 	for (var i = 0; i < search.length; i++) {
@@ -133,7 +158,7 @@ var searchResultsList = (search, type)=>{
 /******************/
 
 /*Game View*/
-var gameViewRenderObject = (output)=>{
+var gameViewRenderObject = (output, consoles)=>{
 	return {
       pageTitle: output.body[0].name,
       gameTitle: output.body[0].name,
@@ -141,7 +166,8 @@ var gameViewRenderObject = (output)=>{
       genre1: genreResolve(output.body[0].genres,0),
       genre2: genreResolve(output.body[0].genres,1),
       image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
-      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
+      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet",
+      consoles: consoles
   };
 }
 /*Company view*/
@@ -163,6 +189,8 @@ var systemViewRenderObject = (output)=>{
       summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
   };
 }
+
+
 
 /**Selection Games***
 ******************/
@@ -196,6 +224,19 @@ var renderHome = (output)=>{
 	}
 }
 
+
+
+/*Auxiliary functions*/
+
+var compareArray = (arr,value)=>{
+	for(var index1 = 0; index1 < arr.length; index1++){
+		if(value === arr[index1]){
+			return true;
+		}
+	}
+	return false;
+}
+
 /****************/
 /*Module exports*/
 /****************/
@@ -211,5 +252,7 @@ module.exports = {
 	gamesArray,
 	consoleResolve,
 	consoleMultipleResolve,
-	consoleArrayResolve
+	consoleArrayResolve,
+	consoleArrayToLinks,
+	gameToConsoleLinks
 }
