@@ -42,10 +42,6 @@ app.use((req,res,next)=>{
 ****************/
 app.get('/', (req, res) => {
   igdb.games({ ids: gameEngine.gamesArray, fields: engineVariables.gameRenderFields }).then((output)=>{
-    console.log(output.body[1]);
-    console.log(output.body[2]);
-    console.log(output.body[0]);
-    console.log(gameEngine.renderHome(output));
     res.render('home.hbs', gameEngine.renderHome(output));
   },(e)=>{
     res.render('404.hbs');
@@ -59,8 +55,11 @@ app.get('/', (req, res) => {
 /*Load game view*/
 app.get('/gameView', (req, res) => {
   igdb.games({ ids: [req.query.id], fields: engineVariables.gameRenderFields }).then((output)=>{
+    console.log(output.body[0]);
     gameEngine.gameToConsoleLinks(output,(consoles)=>{
-      res.render('gameView.hbs', gameEngine.gameViewRenderObject(output,consoles));
+      gameEngine.resolveCompaniesForGame(output.body[0],(devs,pubs)=>{
+        res.render('gameView.hbs', gameEngine.gameViewRenderObject(output,consoles,devs,pubs));
+      });
     });
   },(e)=>{
     res.render('404.hbs');
@@ -120,12 +119,7 @@ app.get('/badRequest', (req, res) => {
 
 /*testing purposes only*/
 app.get('/test', (req, res) => {
- 
-  igdb.games({ ids: [1036], fields: engineVariables.gameRenderFields }).then((output)=>{
-    //console.log(output.body[0]);
-  },(e)=>{
-    res.render('404.hbs');
-  });
+  
 });
 
 /*******************/

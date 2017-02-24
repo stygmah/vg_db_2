@@ -53,7 +53,7 @@ var countryResolve = (iso)=>{
 
 /*Console Resolve ASYNC*/
 var consoleResolve = (systemID, callback)=>{
-	igdb.platforms({ ids: [systemID], fields: "*"}).then((output)=>{
+	igdb.platforms({ ids: [systemID], fields: "name"}).then((output)=>{
       callback(output.body[0].name);
     },(e)=>{
       console.log("Error resolving console");
@@ -61,7 +61,7 @@ var consoleResolve = (systemID, callback)=>{
     });
 }
 
-/*Multiple Resolve ASYNC*/
+/*Multiple Console Resolve ASYNC*/
 var consoleMultipleResolve = (consoleArray, callback)=>{
 	var resolvedArray = [];
 	itemsProcessed = 0;
@@ -101,7 +101,7 @@ var gameToConsoleLinks = (game, callback)=>{
 	doneArray = [];
 
 	consoleArray = consoleArrayResolve(game);
-	console.log("Array length"+consoleArray.length);
+
 	consoleArray.forEach((item)=>{	
 		consoleResolve(item,(consol)=>{
 
@@ -118,6 +118,65 @@ var gameToConsoleLinks = (game, callback)=>{
    			}
 		});
 	});
+}
+
+/***Company Resolvers***
+***********************/
+
+/*Company Resolve ASYNC*/
+var companyResolve = (companyID, callback)=>{
+	igdb.companies({ ids: [companyID], fields: "name"}).then((output)=>{
+      callback(output.body[0].name);
+    },(e)=>{
+      console.log("***Error resolving company***: "+e);
+      callback (1);
+    });
+}
+/*Multiple Company Resolve ASYNC*/
+var companyMultipleResolve = (companyArray, callback)=>{
+	var nameArray = [];
+	iProcessed = 0;
+
+	companyArray.forEach((element)=>{	
+		companyResolve(element,(company)=>{
+			nameArray.push(company);
+			iProcessed++;
+
+			if(iProcessed === companyArray.length) {
+      			callback(nameArray);
+    		}
+		});
+	});
+}
+/*Company to Link*/
+var companyToLinks = (company, companyID )=>{	
+	return'<a href="/companyView?id='+companyID+'">'+company+'</a>';
+}
+var companyArrayToLinks = (companyArray, companyIdArray)=>{
+	result = '';
+
+	for(var indx = 0; indx < companyArray.length; indx++){
+		result = result +' '+ companyToLinks(companyArray[indx],companyIdArray[indx]);
+	}
+	return result;
+}
+
+/*Resolve developers and publishers for game and turns to links ASYNC*/
+var resolveCompaniesForGame = (game, callback)=>{
+	arrayDeveloperName = [];
+	arrayDeveloperId = game.developers;
+	arrayPublisherName = [];
+	arrayPublisherId = game.publishers;
+
+	indexConcatinatedArray = 0;
+	var concatinatedArray = arrayDeveloperId.concat(arrayPublisherId);
+
+	companyMultipleResolve(concatinatedArray,(result)=>{
+			arrayDeveloperName = result.slice(0,arrayDeveloperId.length);
+			arrayPublisherName = result.slice(arrayDeveloperId.length, arrayPublisherId.length+1);
+			callback(arrayDeveloperName,arrayPublisherName);
+		});
+
 }
 
 
@@ -158,7 +217,7 @@ var searchResultsList = (search, type)=>{
 /******************/
 
 /*Game View*/
-var gameViewRenderObject = (output, consoles)=>{
+var gameViewRenderObject = (output, consoles, developers, publishers)=>{
 	var date = new Date(output.body[0].first_release_date);
 	var date = date.toString();
 	return {
@@ -170,7 +229,9 @@ var gameViewRenderObject = (output, consoles)=>{
       image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
       summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet",
       consoles: consoles,
-      releaseDate: date.substring(4,16) || unknown
+      releaseDate: date.substring(4,16) || unknown,
+      publishers: companyArrayToLinks(publishers,output.body[0].publishers),
+      developers: companyArrayToLinks(developers,output.body[0].developers)
   };
 }
 /*Company view*/
@@ -257,5 +318,6 @@ module.exports = {
 	consoleMultipleResolve,
 	consoleArrayResolve,
 	consoleArrayToLinks,
-	gameToConsoleLinks
+	gameToConsoleLinks,
+	resolveCompaniesForGame
 }
