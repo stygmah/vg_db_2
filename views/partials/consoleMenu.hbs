@@ -1,0 +1,40 @@
+<div>
+	<div class="row">
+		<h5>{{systemName}}</h5>
+		<h6><em>{{genre1}}</em>
+	</div>
+	<!--Tab Menu-->
+	<div class="tab row">
+		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Summary')">Summary</a>
+		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Details')">Details</a>
+		<a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Tokyo')">Something</a>
+	</div>
+	<div class="row">
+		<!--Game Image-->
+		<div class="column small-12 large-3">
+			<img src="{{image}}" alt="{{systemName}} logo">
+		</div>
+		<!--Tab 1-->
+		<div id="Summary" class="tabcontent column small-12 large-9" style="display:block">
+			<div>
+				<ul>
+					<li><strong>Country: </strong> {{country}}</li>
+					<li><strong>Developer(s): </strong> {{{consoles}}} </li>
+				</ul>
+				<p>{{summary}}</p>
+			</div>
+		</div>
+		<!--Tab 2-->
+		<div id="Details" class="tabcontent column small-12 large-9">
+		  <h3>Details</h3>
+		  <p>Paris is the capital of Fra.</p> 
+		</div>
+		<!--Tab 3-->
+		<div id="Tokyo" class="tabcontent column small-12 large-9">
+		  <h3>Tokyo</h3>
+		  <p>Tokyo is the capital of Japan.</p>
+		</div>
+
+
+	</div>		
+</div>

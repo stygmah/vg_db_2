@@ -55,7 +55,6 @@ app.get('/', (req, res) => {
 /*Load game view*/
 app.get('/gameView', (req, res) => {
   igdb.games({ ids: [req.query.id], fields: engineVariables.gameRenderFields }).then((output)=>{
-    console.log(output.body[0]);
     gameEngine.gameToConsoleLinks(output,(consoles)=>{
       gameEngine.resolveCompaniesForGame(output.body[0],(devs,pubs)=>{
         res.render('gameView.hbs', gameEngine.gameViewRenderObject(output,consoles,devs,pubs));
@@ -76,6 +75,7 @@ app.get('/companyView', (req, res) => {
 /*Load system view*/
 app.get('/systemView', (req, res) => {
   igdb.platforms({ ids: [req.query.id], fields: "*" }).then((output)=>{
+    console.log(output.body);
     res.render('systemView.hbs', gameEngine.systemViewRenderObject(output));
   },(e)=>{
     res.render('404.hbs');

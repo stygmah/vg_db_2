@@ -1,39 +1,28 @@
+
 <!DOCTYPE html>
 
-<html class="gradContainer">
+<html>
 	{{> head}}
-	<body class="gradContainer">
+	<body class="grad-container">
 		{{> nav}}
-		<div class="container mainView">
-			<div class="row">
-				<div class="col-lg-9 col-md-9 col-sm-12 leftColumnGameView">
-					<h1>{{systemName}}</h1>
-					<div class="row">
-						<div class="col-lg-5 col-md-5">
-							<img src="{{image}}" alt="Cover of {{systemName}}">
-						</div>
-						<div class="col-lg-7 col-md-7">
-							<ul>
-								<li><strong>Developer: </strong> </li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-							<p>{{summary}}</p>
-						</div>
-					</div>
-					
-					<div class="row mediaView">
-						
-					</div>			
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-12 rightColumnGameView">
+		
+		<div class="row main-view game-main-view">
 
-				</div>
+			<div class="column large-8">
+			<!--LEFT COLUMN-->
+			{{> consoleMenu}}
+			</div>
+		
+			<div class="column large-4">
+			<!--RIGHT COLUMN-->
+				RIGHT COLUMN
 			</div>
 		</div>
-	{{> jsbottom}}
+
+
+		<!--Js-->
+		{{> jsbottom}}
+		<script src="../../public/js/gameMenu.js">
+		</script>
 	</body>
 </html>

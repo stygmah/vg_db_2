@@ -45,7 +45,12 @@ var countryResolve = (iso)=>{
 		return countrydata.numeric[iso].name.en;
 	}
 }
-
+/*Date resolve*/
+var dateResolve = (unixEpoch)=>{
+	var date = new Date(unixEpoch);
+	var date = date.toString();
+	return date.substring(4,16) || 'unknown';
+}
 
 /*Console resolvers*
 ********************
@@ -164,9 +169,9 @@ var companyArrayToLinks = (companyArray, companyIdArray)=>{
 /*Resolve developers and publishers for game and turns to links ASYNC*/
 var resolveCompaniesForGame = (game, callback)=>{
 	arrayDeveloperName = [];
-	arrayDeveloperId = game.developers;
+	arrayDeveloperId = game.developers || [];
 	arrayPublisherName = [];
-	arrayPublisherId = game.publishers;
+	arrayPublisherId = game.publishers || [];
 
 	indexConcatinatedArray = 0;
 	var concatinatedArray = arrayDeveloperId.concat(arrayPublisherId);
@@ -218,8 +223,6 @@ var searchResultsList = (search, type)=>{
 
 /*Game View*/
 var gameViewRenderObject = (output, consoles, developers, publishers)=>{
-	var date = new Date(output.body[0].first_release_date);
-	var date = date.toString();
 	return {
       pageTitle: output.body[0].name,
       gameTitle: output.body[0].name,
@@ -229,7 +232,7 @@ var gameViewRenderObject = (output, consoles, developers, publishers)=>{
       image:  igdb.image(output.body[0].cover, "cover_big", "jpg") || "no image",
       summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet",
       consoles: consoles,
-      releaseDate: date.substring(4,16) || unknown,
+      releaseDate: dateResolve(output.body[0].first_release_date),
       publishers: companyArrayToLinks(publishers,output.body[0].publishers),
       developers: companyArrayToLinks(developers,output.body[0].developers)
   };
@@ -241,7 +244,8 @@ var companyViewRenderObject = (output)=>{
       companyName: output.body[0].name,
       country: countryResolve(output.body[0].country),
       image:  igdb.image(output.body[0].logo, "cover_big", "jpg") || "no image",
-      summary: output.body[0].description/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
+      summary: output.body[0].description/*.substring(0, 700) */|| output.body[0].name+" has no description yet",
+      founded: dateResolve(output.body[0].start_date)
   };
 }
 /*System view*/
@@ -250,7 +254,8 @@ var systemViewRenderObject = (output)=>{
       pageTitle: output.body[0].name,
       systemName: output.body[0].name,
       image:  igdb.image(output.body[0].logo, "cover_big", "jpg") || "no image",
-      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet"
+      summary: output.body[0].summary/*.substring(0, 700) */|| output.body[0].name+" has no description yet",
+      releaseDate: dateResolve(output.body[0].created_at)
   };
 }
 
