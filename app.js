@@ -3,12 +3,14 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 const path = require('path');
-const igdb = require('igdb-api-node')
+const igdb = require('igdb-api-node');
 //Other Const
 const doc = require('./private/doc');
 
+//Local modules
 const engineVariables = require('./gameEngine/engineVariables');
 const gameEngine = require('./gameEngine/gameEngine');
+const helpers = require('./views/helpers/hbsHelpers');
 
 global.mashapeKey = doc.mashapeKey;
 const port = process.env.PORT || 3000;
@@ -17,11 +19,13 @@ const port = process.env.PORT || 3000;
 
 /*Setup & middleware*/
 var app = express();
+
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 app.use("/public", express.static(path.join(__dirname, 'public')));
 
-
+//Load hbs helpers
+helpers.arrayToLinksHBS();
 
 /*maintenance*
 -Toggle true when in maintenance
@@ -120,6 +124,10 @@ app.get('/badRequest', (req, res) => {
 app.get('/test', (req, res) => {
   igdb.games({ ids: [engineVariables.featuredGamesArray[0]], fields: engineVariables.gameRenderFields }).then((output)=>{
     console.log(gameEngine.screenshotsToArray(output.body[0].screenshots));
+    res.render('test.hbs', {
+      people: [{firstName:'me', lastName:'dsa'},{firstName:'me', lastName:'dsa'},{firstName:'me', lastName:'dsa'},{firstName:'me', lastName:'dsa'}]
+    });
+
   },(e)=>{
     res.render('404.hbs');
   });
