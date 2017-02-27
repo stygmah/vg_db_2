@@ -42,6 +42,10 @@ h1, h2, h3, h4, h5, h6 {
 .top-bar, .top-bar ul {
   background-color: #111111; }
 
+.center-bar {
+  position: absolute;
+  margin-left: 36%; }
+
 /* Style the tab */
 div.tab {
   overflow: hidden;

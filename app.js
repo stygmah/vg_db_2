@@ -41,7 +41,7 @@ app.use((req,res,next)=>{
 /*Load home view*
 ****************/
 app.get('/', (req, res) => {
-  igdb.games({ ids: gameEngine.gamesArray, fields: engineVariables.gameRenderFields }).then((output)=>{
+  igdb.games({ ids: engineVariables.featuredGamesArray, fields: engineVariables.gameRenderFields }).then((output)=>{
     res.render('home.hbs', gameEngine.renderHome(output));
   },(e)=>{
     res.render('404.hbs');
@@ -75,7 +75,6 @@ app.get('/companyView', (req, res) => {
 /*Load system view*/
 app.get('/systemView', (req, res) => {
   igdb.platforms({ ids: [req.query.id], fields: "*" }).then((output)=>{
-    console.log(output.body);
     res.render('systemView.hbs', gameEngine.systemViewRenderObject(output));
   },(e)=>{
     res.render('404.hbs');
@@ -119,7 +118,11 @@ app.get('/badRequest', (req, res) => {
 
 /*testing purposes only*/
 app.get('/test', (req, res) => {
-  
+  igdb.games({ ids: [engineVariables.featuredGamesArray[0]], fields: engineVariables.gameRenderFields }).then((output)=>{
+    console.log(gameEngine.screenshotsToArray(output.body[0].screenshots));
+  },(e)=>{
+    res.render('404.hbs');
+  });
 });
 
 /*******************/
