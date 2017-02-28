@@ -83,3 +83,6 @@ div.tab a:focus, .active {
 
 img {
   padding: 1rem; }
+
+.screenshot-container {
+  width: 100%; }

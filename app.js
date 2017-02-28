@@ -125,7 +125,7 @@ app.get('/test', (req, res) => {
   igdb.games({ ids: [engineVariables.featuredGamesArray[0]], fields: engineVariables.gameRenderFields }).then((output)=>{
     console.log(gameEngine.screenshotsToArray(output.body[0].screenshots));
     res.render('test.hbs', {
-      people: [{firstName:'me', lastName:'dsa'},{firstName:'me', lastName:'dsa'},{firstName:'me', lastName:'dsa'},{firstName:'me', lastName:'dsa'}]
+      linklist: gameEngine.screenshotsToArray(output.body[0].screenshots)
     });
 
   },(e)=>{

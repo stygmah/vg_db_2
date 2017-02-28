@@ -223,7 +223,7 @@ var screenshotsToArray = (imageObjectArray)=>{
 	var returnArray = [];
 
 	imageObjectArray.forEach((item)=>{
-		returnArray.push(igdb.image(item, "screenshot_med", "jpg"));
+		returnArray.push({url: igdb.image(item, "screenshot_big", "jpg")});
 	});
 	return returnArray;
 }
@@ -243,7 +243,8 @@ var gameViewRenderObject = (output, consoles, developers, publishers)=>{
       consoles: consoles,
       releaseDate: dateResolve(output.body[0].first_release_date),
       publishers: companyArrayToLinks(publishers,output.body[0].publishers),
-      developers: companyArrayToLinks(developers,output.body[0].developers)
+      developers: companyArrayToLinks(developers,output.body[0].developers),
+      screenshots: screenshotsToArray(output.body[0].screenshots)
   };
 }
 /*Company view*/

@@ -2,12 +2,24 @@ var hbs = require('hbs');
 
 
 var arrayToLinksHBS = ()=>{
-	hbs.registerHelper('list', function(items, options) {
-  		var out = "<ul>";
+	
+	/*Screenshot carousel list*/
+	hbs.registerHelper('screenshot', function(items, options) {
+  		var out = '';
   		for(var i=0, l=items.length; i<l; i++) {
-    		out = out + "<li>" + options.fn(items[i]) + "</li>";
+    		if(i===0){
+    			out = out + 
+    				'<li class="orbit-slide is-active">'
+      				+'<img class="orbit-image" src="' + options.fn(items[i]).replace(/ /g,'') + '">'
+    				+'</li>';
+    		}else{
+    			out = out + 
+    				'<li class="orbit-slide">'
+      				+'<img class="orbit-image" src="' + options.fn(items[i]).replace(/ /g,'') + '">'
+    				+'</li>';
+    		}
   		}
-  		return out + "</ul>";
+  		return out;
 	});
 }
 
