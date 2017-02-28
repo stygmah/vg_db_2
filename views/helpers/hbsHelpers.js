@@ -2,7 +2,6 @@ var hbs = require('hbs');
 
 
 var arrayToLinksHBS = ()=>{
-	
 	/*Screenshot carousel list*/
 	hbs.registerHelper('screenshot', function(items, options) {
   		var out = '';
@@ -23,6 +22,9 @@ var arrayToLinksHBS = ()=>{
 	});
 }
 
+var searchHelpersHBS = ()=>{
+  
+}
 
 
 module.exports = {

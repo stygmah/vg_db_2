@@ -189,33 +189,29 @@ var resolveCompaniesForGame = (game, callback)=>{
 /**Search functions**/
 /********************/
 var linkSearch = (search, type)=>{
-	var id = search.id;
-	var name = search.name;
-	var classes= "searchBlock";
+	var out = {};
+
+	out.id = search.id;
+	out.name = search.name;
 	if(type === "game"){
-		var genre1 = genreResolve(search.genres,0);
-		var genre2 = genreResolve(search.genres,1);
-		var thumb = igdb.image(search.cover, "thumb", "jpg");
-		return '<li><div class="'+classes+'"><a href="/gameView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+genre1+genre2+'</h6></div></a></div></li>';
-	}else if(type === "company"){
-		var thumb = igdb.image(search.logo, "thumb", "jpg");
-
-		return '<li><div class="'+classes+'"><a href="/companyView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+countryResolve(search.country)+'</h6></div></a></div></li>';
-	}else if(type === "system"){
-		var thumb = igdb.image(search.logo, "thumb", "jpg");
-		return '<li><div class="'+classes+'"><a href="/systemView?id='+id+'"><img src="'+thumb+'"><div><h5>'+name+'</h5><h6>'+'country'+'</h6></div></a></div></li>';
+		out.genre1 = genreResolve(search.genres,0);
+		out.genre2 = genreResolve(search.genres,1);
+		out.thumb = igdb.image(search.cover, "thumb", "jpg");
+		return out;
+	}else if(type === "company" || type === "system"){
+		out.thumb = igdb.image(search.logo, "thumb", "jpg");
+		return out;
 	}else{
-
+		return console.log('Please specify valid search type');
 	}
-
 }
 
 var searchResultsList = (search, type)=>{
-	var htmlString ='<ul class="result-list">';
+	var searchArray = [];
 	for (var i = 0; i < search.length; i++) {
-		htmlString += linkSearch(search[i], type);
+		searchArray.push(linkSearch(search[i], type)); 
 	};
-	return htmlString+'</ul>';
+	return searchArray;
 }
 /*Screenshots***
 ***************/
@@ -269,7 +265,26 @@ var systemViewRenderObject = (output)=>{
   };
 }
 
-
+/****Render Search Results*****
+******************************/
+var renderGameSearch = (output)=>{
+	return {
+		game: true,
+		resultArray: searchResultsList(output.body,"game")
+	}
+}
+var renderSystemSearch = (output)=>{
+	return {
+		system: true,
+		resultArray: searchResultsList(output.body,"system")
+	}
+}
+var renderCompanySearch = (output)=>{
+	return {
+		company: true,
+		resultArray: searchResultsList(output.body,"company")
+	}
+}
 
 /***Home render***
 ******************/
@@ -331,5 +346,8 @@ module.exports = {
 	consoleArrayToLinks,
 	gameToConsoleLinks,
 	resolveCompaniesForGame,
-	screenshotsToArray
+	screenshotsToArray,
+	renderGameSearch,
+	renderCompanySearch,
+	renderSystemSearch
 }

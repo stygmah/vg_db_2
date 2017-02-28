@@ -1,3 +1,53 @@
+<ul>
+	
+		
+			{{#if game}}
+				{{#each resultArray}}
+					<li>
+						<a href="/gameView?id={{id}}">
+							<div>
+								<img src="{{thumb}}">
+							</div>
+							<div>
+								<h5>{{name}}</h5>
+								<h6>{{genre1}}{{genre2}}</h6>
+							</div>
+						</a>
+					</li>
+				{{/each}}
+			{{/if}}
 
+			{{#if system}}
+				{{#each resultArray}}
+					<li>
+						<a href="/systemView?id={{id}}">
+							<div>
+								<img src="{{thumb}}">
+							</div>
+							<div>
+								<h5>{{name}}</h5>
+								<h6>{{genre1}}{{genre2}}</h6>
+							</div>
+						</a>
+					</li>
+				{{/each}}
+			{{/if}}
 
-{{{searchResults}}}
+			{{#if company}}
+				{{#each resultArray}}
+					<li>
+						<a href="/companyView?id={{id}}">
+							<div>
+								<img src="{{thumb}}">
+							</div>
+							<div>
+								<h5>{{name}}</h5>
+								<h6>{{genre1}}{{genre2}}</h6>
+							</div>
+						</a>
+					</li>
+				{{/each}}
+			{{/if}}
+		
+	
+</ul>

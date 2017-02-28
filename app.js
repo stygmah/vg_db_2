@@ -91,22 +91,23 @@ app.get('/systemView', (req, res) => {
 app.get('/search', (req, res) => {
   if(req.query.type === 'game'){
     igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: engineVariables.gameRenderFields}).then((output)=>{
+      console.log(gameEngine.renderGameSearch(output));
       if (req.query.search === ''|| output.length === 0) {
         res.render('404.hbs');
       };
-      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
+      res.render('search.hbs', gameEngine.renderGameSearch(output));
     },(e)=>{
       console.log(e);
     });
   }else if(req.query.type === 'company'){
     igdb.companies({ search: req.query.search, limit: req.query.limit || 10, fields: "*", order:'popularity:desc'}).then((output)=>{
-      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
+      res.render('search.hbs',gameEngine.renderCompanySearch(output));
     },(e)=>{
       res.render('404.hbs');
     });
   }else if(req.query.type === 'system'){
     igdb.platforms({ search: req.query.search, limit: req.query.limit || 10, fields: "*"}).then((output)=>{
-      res.render('search.hbs',{css:'search', searchResults: gameEngine.searchResultsList(output.body,req.query.type)});
+      res.render('search.hbs',gameEngine.renderSystemSearch(output));
     },(e)=>{
       res.render('404.hbs');
     });
@@ -122,10 +123,9 @@ app.get('/badRequest', (req, res) => {
 
 /*testing purposes only*/
 app.get('/test', (req, res) => {
-  igdb.games({ ids: [engineVariables.featuredGamesArray[0]], fields: engineVariables.gameRenderFields }).then((output)=>{
-    console.log(gameEngine.screenshotsToArray(output.body[0].screenshots));
-    res.render('test.hbs', {
-      linklist: gameEngine.screenshotsToArray(output.body[0].screenshots)
+  igdb.games({ search: 'zelda', limit: req.query.limit || 10, fields: engineVariables.gameRenderFields}).then((output)=>{
+    res.render('test.hbs',{
+      list: gameEngine.searchResultsList(output.body,"game")
     });
 
   },(e)=>{
