@@ -91,7 +91,6 @@ app.get('/systemView', (req, res) => {
 app.get('/search', (req, res) => {
   if(req.query.type === 'game'){
     igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: engineVariables.gameRenderFields}).then((output)=>{
-      console.log(gameEngine.renderGameSearch(output));
       if (req.query.search === ''|| output.length === 0) {
         res.render('404.hbs');
       };

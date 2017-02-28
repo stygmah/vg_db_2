@@ -217,10 +217,15 @@ var searchResultsList = (search, type)=>{
 ***************/
 var screenshotsToArray = (imageObjectArray)=>{
 	var returnArray = [];
+	if(imageObjectArray === undefined){
+		return [];
+	}
 
-	imageObjectArray.forEach((item)=>{
-		returnArray.push({url: igdb.image(item, "screenshot_big", "jpg")});
-	});
+	
+		imageObjectArray.forEach((item)=>{
+			returnArray.push({url: igdb.image(item, "screenshot_big", "jpg")});
+		});
+	
 	return returnArray;
 }
 /**RENDER OBJECTS VIEWS**/
