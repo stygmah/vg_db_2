@@ -46,10 +46,15 @@ app.use((req,res,next)=>{
 ****************/
 app.get('/', (req, res) => {
   igdb.games({ ids: engineVariables.featuredGamesArray, fields: engineVariables.gameRenderFields }).then((output)=>{
-    res.render('home.hbs', gameEngine.renderHome(output));
+    igdb.games(engineVariables.futureReleasesParams).then((futureReleases)=>{
+      res.render('home.hbs', gameEngine.renderHome(output,futureReleases.body));
+    },(e)=>{
+      console.log('Problem loading future releases');
+    });  
   },(e)=>{
     res.render('404.hbs');
-  });
+  }
+);
 
 
 
@@ -122,11 +127,15 @@ app.get('/badRequest', (req, res) => {
 
 /*testing purposes only*/
 app.get('/test', (req, res) => {
-  igdb.games({ search: 'zelda', limit: req.query.limit || 10, fields: engineVariables.gameRenderFields}).then((output)=>{
-    res.render('test.hbs',{
-      list: gameEngine.searchResultsList(output.body,"game")
-    });
-
+  igdb.games({limit: req.query.limit || 10, fields: "name,first_release_date", 
+    order: "first_release_date:asc",
+    filters:{
+    'first_release_date-gt': Date.now(),
+    'first_release_date-lt': Date.now()+15983864500,
+    'publishers-exists': 0
+  }}).then((output)=>{
+    console.log(output.body);
+    console.log(output.body.length);
   },(e)=>{
     res.render('404.hbs');
   });

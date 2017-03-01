@@ -4,14 +4,16 @@
 	{{> head}}
 	<body>
 		{{> nav}}
-
-
-		
 		<div class="row main-view home-main-view">
 			{{>slideshow}}
 			<div class="column large-8 small-12">
 			<!--LEFT COLLUMN-->
-				LEFT COLUMN
+				<h6>Upcoming Releases</h6>
+				<ol>
+					{{#each futureReleases}}
+					<li><a href="/gameView?id={{id}}">{{name}}</a></li>
+					{{/each}}
+				</ol>
 			</div>
 		
 			<div class="column large-4">

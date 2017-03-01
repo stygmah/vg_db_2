@@ -219,12 +219,10 @@ var screenshotsToArray = (imageObjectArray)=>{
 	var returnArray = [];
 	if(imageObjectArray === undefined){
 		return [];
-	}
-
-	
-		imageObjectArray.forEach((item)=>{
-			returnArray.push({url: igdb.image(item, "screenshot_big", "jpg")});
-		});
+	}	
+	imageObjectArray.forEach((item)=>{
+		returnArray.push({url: igdb.image(item, "screenshot_big", "jpg")});
+	});
 	
 	return returnArray;
 }
@@ -294,7 +292,7 @@ var renderCompanySearch = (output)=>{
 /***Home render***
 ******************/
 
-var renderHome = (output)=>{
+var renderHome = (output, futureReleases)=>{
 
 	return {
 		pageTitle: 'Home',
@@ -316,7 +314,8 @@ var renderHome = (output)=>{
 		game5Thumb: igdb.image(output.body[4].cover, "cover_big", "jpg"),
 		game6Id: engineVariables.featuredGamesArray[5],
 		game6Title: output.body[5].name,
-		game6Thumb: igdb.image(output.body[5].cover, "cover_big", "jpg")
+		game6Thumb: igdb.image(output.body[5].cover, "cover_big", "jpg"),
+		futureReleases: futureReleases
 	}
 }
 

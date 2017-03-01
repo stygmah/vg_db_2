@@ -1,13 +1,23 @@
 <!DOCTYPE html>
+
 <html>
 	{{> head}}
-<body class="gradContainer">
-	{{> nav}}
-	<div class="">
-		<div>
-			{{> searchResults}}
+	<body class="grad-container">
+		{{> nav}}
+		<div class="row main-view game-main-view">
+			<div class="column large-8">
+			<!--LEFT COLUMN-->
+				{{> searchResults}}
+			</div>
+		
+			<div class="column large-4">
+			<!--RIGHT COLUMN-->
+				RIGHT COLUMN
+			</div>
 		</div>
-	</div>
-{{> jsbottom}}
-</body>
+		<!--Js-->
+		{{> jsbottom}}
+		<script src="../../public/js/gameMenu.js">
+		</script>
+	</body>
 </html>

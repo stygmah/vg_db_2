@@ -46,6 +46,14 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   margin-left: 36%; }
 
+ul {
+  list-style: none;
+  padding-top: 5px; }
+  ul .atributes {
+    margin-top: 10px; }
+  ul .image-thumb {
+    float: left; }
+
 /* Style the tab */
 div.tab {
   overflow: hidden;
