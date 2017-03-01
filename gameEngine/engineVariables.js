@@ -1,9 +1,10 @@
 
 /*API Call Values*/
 var gameRenderFields = "id,name,category,genres,cover,summary,release_dates,first_release_date,publishers,developers,screenshots,hypes";
+var gameSearchFields = "id,name,genres,cover";
 var featuredGamesArray = [7346, 11156, 18320, 19562, 19765, 26761, 7349, 25076, 10031, 1111, 1234, 2200];
 
-/*Home*/
+/*Home Lists*/
 var futureReleasesParams = {
 	limit:10, 
 	fields: "name", 
@@ -15,7 +16,16 @@ var futureReleasesParams = {
   }
 };
 
-
+var justReleasedParams = {
+	limit:10, 
+	fields: "name", 
+    order: "first_release_date:desc",
+    filters:{
+    'first_release_date-lte': Date.now(),
+    'first_release_date-gt': Date.now()-15983864500,
+    'publishers-exists': 0
+  }
+};
 
 
 
@@ -31,5 +41,7 @@ var futureReleasesParams = {
 module.exports = {
 	gameRenderFields,
 	featuredGamesArray,
-	futureReleasesParams
+	futureReleasesParams,
+	gameSearchFields,
+	justReleasedParams
 }

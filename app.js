@@ -47,7 +47,12 @@ app.use((req,res,next)=>{
 app.get('/', (req, res) => {
   igdb.games({ ids: engineVariables.featuredGamesArray, fields: engineVariables.gameRenderFields }).then((output)=>{
     igdb.games(engineVariables.futureReleasesParams).then((futureReleases)=>{
-      res.render('home.hbs', gameEngine.renderHome(output,futureReleases.body));
+      igdb.games(engineVariables.justReleasedParams).then((latestReleases)=>{
+        console.log(latestReleases.body);
+        res.render('home.hbs', gameEngine.renderHome(output,futureReleases.body,latestReleases.body));
+      },(e)=>{
+        console.log('Problem loading latest releases');
+      });  
     },(e)=>{
       console.log('Problem loading future releases');
     });  
@@ -95,7 +100,7 @@ app.get('/systemView', (req, res) => {
 *****************/
 app.get('/search', (req, res) => {
   if(req.query.type === 'game'){
-    igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: engineVariables.gameRenderFields}).then((output)=>{
+    igdb.games({ search: req.query.search, limit: req.query.limit || 10, fields: engineVariables.gameSearchFields}).then((output)=>{
       if (req.query.search === ''|| output.length === 0) {
         res.render('404.hbs');
       };

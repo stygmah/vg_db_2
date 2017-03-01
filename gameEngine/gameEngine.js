@@ -292,7 +292,7 @@ var renderCompanySearch = (output)=>{
 /***Home render***
 ******************/
 
-var renderHome = (output, futureReleases)=>{
+var renderHome = (output, futureReleases, latestReleases)=>{
 
 	return {
 		pageTitle: 'Home',
@@ -315,7 +315,8 @@ var renderHome = (output, futureReleases)=>{
 		game6Id: engineVariables.featuredGamesArray[5],
 		game6Title: output.body[5].name,
 		game6Thumb: igdb.image(output.body[5].cover, "cover_big", "jpg"),
-		futureReleases: futureReleases
+		futureReleases: futureReleases,
+		latestReleases: latestReleases
 	}
 }
 
